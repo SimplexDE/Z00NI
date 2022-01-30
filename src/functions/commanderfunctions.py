@@ -62,10 +62,6 @@ async def unload(self, ctx: Context, command: str):
         )
 
         await msg.edit(embed=embed)
-
-        print(
-            f"WARN: {command.upper()} has encountered an Error and has not been unloaded (MANUAL)\n{e}"
-        )
         return False
     else:
         logger.success(f"{command.upper()} entladen.")
@@ -102,9 +98,6 @@ async def reload(self, ctx: Context, command: str):
             f"Typ: **RELOAD**\nDatei: **{command.upper()}**\n\nStatus: **BLOCKED** {BLOCKED}",colour=nextcord.Colour.red()
         )
         await msg.edit(embed=embed)
-        print(
-            f"WARN: {command.upper()} has encountered an Error and has not been reloaded (MANUAL)\n{e}"
-        )
         return False
     else:
         logger.success(f"{command.upper()} neugeladen")
@@ -114,5 +107,4 @@ async def reload(self, ctx: Context, command: str):
             f"Typ: **RELOAD**\nDatei: **{command.upper()}**\n\nStatus: **DONE** {DONE}",colour=nextcord.Colour.green()
         )
         await msg.edit(embed=embed)
-        print(f"INFO: {command.upper()} has been reloaded (MANUAL)")
         return True
