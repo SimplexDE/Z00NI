@@ -23,7 +23,8 @@ class logger_(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, e):
-		print(f"{e}")
+		logger.error(f"Bei der Ausführung des {e.command} ist ein Fehler aufgetreten!")
+		logger.error(f"{e}")
 		await ctx.send("Fehler du Dummkopf!")
 
 	@commands.Cog.listener()
