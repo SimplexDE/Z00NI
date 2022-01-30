@@ -8,13 +8,13 @@ def launch(self):
     loaded_cmds = 0
     not_loaded_cmds = 0
 
-    from src.helper.keep_alive import keep_alive
+    # from src.helper.keep_alive import keep_alive
 
-    keep_alive()
+    # keep_alive()
 
-    from src.helper.sentryio import start_sentryio
+    # from src.helper.sentryio import start_sentryio
 
-    start_sentryio()
+    # start_sentryio()
 
     @self.event
     async def on_ready():

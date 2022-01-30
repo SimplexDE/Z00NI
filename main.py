@@ -1,6 +1,12 @@
 import os
 from nextcord.ext import commands
+import json
 from src.__launcher__ import launch
+
+with open('configuration.json', 'r') as f:
+	data = json.load(f)
+
+	token = data["TOKEN"]
 
 bot = commands.Bot(command_prefix="!",
 					case_insensitive=False,
@@ -8,4 +14,4 @@ bot = commands.Bot(command_prefix="!",
 
 launch(bot)
 
-bot.run(os.getenv("token"))
+bot.run(token)
