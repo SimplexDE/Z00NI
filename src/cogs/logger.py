@@ -1,14 +1,26 @@
 from nextcord.ext import commands
 import nextcord
-from src.helper.checks import is_bot
+from loguru import logger
+from src.helper.checks import is_bot, is_dev
 
 
 
-class logger(commands.Cog):
+class logger_(commands.Cog):
 	"""Logger"""
 	def __init__(self, bot):
 		self.bot = bot
 	
+	@commands.command()
+	@is_dev()
+	async def logshowcase(self, ctx):
+		logger.trace("TRACE-LOG SHOWCASE")
+		logger.debug("DEBUG-LOG SHOWCASE")
+		logger.info("INFO-LOG SHOWCASE")
+		logger.success("SUCCESS-LOG SHOWCASE")
+		logger.warning("WARNING-LOG SHOWCASE")
+		logger.error("ERROR-LOG SHOWCASE")
+		logger.critical("CRITICAL-LOG SHOWCASE")
+
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, e):
 		print(f"{e}")
@@ -71,4 +83,4 @@ class logger(commands.Cog):
 		await ch.send(embed=embed)
 
 def setup(bot):
-	bot.add_cog(logger(bot))
+	bot.add_cog(logger_(bot))

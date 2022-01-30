@@ -1,5 +1,6 @@
 import nextcord
 from nextcord.ext import commands
+from loguru import logger
 from src.helper.checks import is_staff
 
 

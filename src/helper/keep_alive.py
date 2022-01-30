@@ -1,8 +1,15 @@
 from flask import Flask
 from threading import Thread
+from loguru import logger
+import logging
+import os
 
 app = Flask('')
 
+from flask.logging import default_handler
+
+logging.getLogger('werkzeug').disabled = True
+os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 
 @app.route('/')
 def main():
@@ -15,11 +22,12 @@ def run():
 
 def keep_alive():
     try:
-        print("INFO: Keep_alive service starting...")
+        logger.info("KEEP_ALIVE Service wird gestartet.")
         server = Thread(target=run)
         server.start()
     except Exception as e:
-        print(f"WARN: Keep_alive service did not start...\n{e}")
+        logger.error("KEEP_ALIVE Service konnte nicht gestartet werden.")
+        logger.error(e)
         return
     else:
-        print("INFO: keep_alive service started...")
+        logger.success("KEEP_ALIVE Service gestartet.")
