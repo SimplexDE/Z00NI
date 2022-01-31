@@ -3,3 +3,6 @@ src/cogs/__pycache__/*
 src/functions/*
 src/helper/*
 src/Logs/*
+__pycache__/*
+__ignore__/*
+.env

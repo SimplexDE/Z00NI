@@ -4,13 +4,7 @@ import json
 from loguru import logger
 from src.__launcher__ import launch
 
-with open('../configuration.json', 'r') as f:
-	data = json.load(f)
-
-	token = data["TOKEN"]
-	tokendev = data["TOKEN_DEV"]
-
-bot = commands.Bot(command_prefix="!",
+bot = commands.Bot(command_prefix="d!",
 					case_insensitive=False,
 					description="Z00NI / Developed by Simplex#7008")
 
@@ -27,4 +21,4 @@ except Exception as e:
 else:
 	logger.log("STARTUP", "Bot gestartet.")
 
-bot.run(token)
+bot.run(os.getenv("token"))
