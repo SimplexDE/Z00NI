@@ -1,8 +1,9 @@
 src/__pycache__/*
 src/cogs/__pycache__/*
-src/functions/*
-src/helper/*
+src/functions/__pycache__/*
+src/helper/__pycache__/*
 src/Logs/*
 __pycache__/*
 __ignore__/*
 .env
+vscode/*
