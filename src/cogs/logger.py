@@ -9,21 +9,11 @@ class logger_(commands.Cog):
 	"""Logger"""
 	def __init__(self, bot):
 		self.bot = bot
-	
-	@commands.command()
-	@is_dev()
-	async def logshowcase(self, ctx):
-		logger.trace("TRACE-LOG SHOWCASE")
-		logger.debug("DEBUG-LOG SHOWCASE")
-		logger.info("INFO-LOG SHOWCASE")
-		logger.success("SUCCESS-LOG SHOWCASE")
-		logger.warning("WARNING-LOG SHOWCASE")
-		logger.error("ERROR-LOG SHOWCASE")
-		logger.critical("CRITICAL-LOG SHOWCASE")
 
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, e):
-		print(f"{e}")
+		logger.error(f"Bei der Ausführung eines Commands ist ein Fehler aufgetreten!")
+		logger.error(f"{e}")
 		await ctx.send("Fehler du Dummkopf!")
 
 	@commands.Cog.listener()

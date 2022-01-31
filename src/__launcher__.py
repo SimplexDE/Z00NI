@@ -17,6 +17,11 @@ def launch(self):
 
     # start_sentryio()
 
+    logger.add("Logs/DEBUG_{time}.log", level="DEBUG", rotation="200 MB", delay=True, retention="1 hour", compression="zip")
+    logger.add("Logs/WARNING_{time}.log", level="WARNING", rotation="100 MB", delay=True, retention="1.5 hour", compression="zip")
+    logger.add("Logs/ERROR_{time}.log", level="ERROR", rotation="100 MB", delay=True, retention="2 hour", compression="zip")
+    logger.add("Logs/CRITICAL_{time}.log", level="CRITICAL", rotation="100 MB", delay=True, retention="3 hour", compression="zip")
+
     @self.event
     async def on_ready():
         #print(f"\nEingeloggt als {{0.user}}, mit Nextcord {{1.__version__}}\nEs wurde/n {{2}} Cog/s geladen.\nEs wurde/n {{3}} Cog/s ausgelassen".format(bot, nextcord, loaded_cmds, not_loaded_cmds))

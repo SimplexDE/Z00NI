@@ -1,0 +1,5 @@
+src/__pycache__/*
+src/cogs/__pycache__/*
+src/functions/*
+src/helper/*
+src/Logs/*
