@@ -1,9 +1,6 @@
-src/__pycache__/*
-src/cogs/__pycache__/*
-src/functions/__pycache__/*
-src/helper/__pycache__/*
-src/Logs/*
-__pycache__/*
-__ignore__/*
+source/Logs/*
+source/old/*
+
+# Removing Files
 .env
-vscode/*
+.vscode/*

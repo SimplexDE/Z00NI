@@ -4,6 +4,8 @@ from loguru import logger
 import logging
 import os
 
+# This File only exists because of Z00NI's hosting
+
 app = Flask('')
 
 from flask.logging import default_handler
@@ -21,13 +23,15 @@ def run():
 
 
 def keep_alive():
+    logger.level("KEEP_ALIVE", no=10, color="<white>")
+    logger.level("KEEP_ALIVE_ERROR", no=30, color="<red>")
     try:
-        logger.info("KEEP_ALIVE Service wird gestartet.")
         server = Thread(target=run)
         server.start()
     except Exception as e:
-        logger.error("KEEP_ALIVE Service konnte nicht gestartet werden.")
-        logger.error(e)
-        return
+        logger.log("KEEP_ALIVE_ERROR", "Service konnte nicht gestartet werden.")
+        logger.log("KEEP_ALIVE_ERROR", e)
+        return False
     else:
-        logger.success("KEEP_ALIVE Service gestartet.")
+        logger.log("KEEP_ALIVE", "Service gestartet.")
+        return True
