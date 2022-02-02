@@ -1,37 +1,37 @@
 from loguru import logger
 
-async def load(self, module):
+def load(self, module):
     try:
         self.bot.load_extension(f"source.Bot.commands.{module}")
-        logger.debug(f"{module} wird geladen...")
+        logger.debug(f"{module.upper()} wird geladen...")
     except Exception as e:
         logger.error(f"Fehler beim laden von {module.upper()}")
         logger.error(e)
         return False
     else:
-        logger.debug(f"{module} geladen.")
+        logger.debug(f"{module.upper()} geladen.")
         return True
 
-async def unload(self, module):
+def unload(self, module):
     try:
         self.bot.unload_extension(f"source.Bot.commands.{module}")
-        logger.debug(f"{module} wird entladen...")
+        logger.debug(f"{module.upper()} wird entladen...")
     except Exception as e:
         logger.error(f"Fehler beim entladen von {module.upper()}")
         logger.error(e)
         return False
     else:
-        logger.debug(f"{module} entladen.")
+        logger.debug(f"{module.upper()} entladen.")
         return True
 
-async def reload(self, module):
+def reload(self, module):
     try:
         self.bot.reload_extension(f"source.Bot.commands.{module}")
-        logger.debug(f"{module} wird neugeladen...")
+        logger.debug(f"{module.upper()} wird neugeladen...")
     except Exception as e:
         logger.error(f"Fehler beim neuladen von {module.upper()}")
         logger.error(e)
         return False
     else:
-        logger.debug(f"{module} neugeladen.")
+        logger.debug(f"{module.upper()} neugeladen.")
         return True

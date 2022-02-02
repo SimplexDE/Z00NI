@@ -23,15 +23,12 @@ def run():
 
 
 def keep_alive():
-    logger.level("KEEP_ALIVE", no=10, color="<white>")
-    logger.level("KEEP_ALIVE_ERROR", no=30, color="<red>")
     try:
         server = Thread(target=run)
         server.start()
     except Exception as e:
-        logger.log("KEEP_ALIVE_ERROR", "Service konnte nicht gestartet werden.")
-        logger.log("KEEP_ALIVE_ERROR", e)
+        logger.critical("Keep_Alive konnte nicht gestartet werden.")
+        logger.critical(e)
         return False
     else:
-        logger.log("KEEP_ALIVE", "Service gestartet.")
         return True

@@ -3,8 +3,10 @@ from time import strftime
 
 from loguru import logger
 from nextcord.ext import commands
+import nextcord
 
 from .Helper.keep_alive import keep_alive
+from .Assets.extloader import extloader
 
 bot = commands.Bot(command_prefix="d!", case_insensitive=False)
 
@@ -20,7 +22,10 @@ def start(version):
 
         bot.load_extension(f"source.Bot.commands.developer")
 
-        # TODO: Extension Loader hier
+        exts = [
+            "util"
+        ]
+        extloader(bot, extensions=exts)
 
         keep_alive()
 

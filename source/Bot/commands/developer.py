@@ -2,6 +2,7 @@ from nextcord.ext import commands
 from nextcord.ext.commands import  Context
 from nextcord import Embed, Colour
 from loguru import logger
+from source.Bot.Helper.presence import bot_presence
 
 from source.Bot.bot import stop
 
@@ -16,7 +17,7 @@ class developer(commands.Cog):
     async def on_ready(self):
         """Sends information on bot state / if the bot is ready"""
         logger.log("BOT", f"Logged in as: {self.bot.user}")
-        logger.log("BOT", f"Commands need to be loaded manually(ofc developer is loaded ^^)")
+        await bot_presence(self.bot)
 
     @commands.command(name="shutdownbot", aliases=["stopbot", "botstop", "shutdown", "stop"])
     @is_dev()
@@ -34,7 +35,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         embed = Embed(title="Load | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
         for _num, _arg in enumerate(args):
-            result = await load(self, _arg)
+            result = load(self, _arg)
             embed.add_field(name=f"`{_arg.upper()}` Load | Ergebnis", value=result, inline=False)
         await msg.edit(embed=embed, delete_after=8)
 
@@ -47,7 +48,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         embed = Embed(title="Unload | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
         for _num, _arg in enumerate(args):
-            result = await unload(self, _arg)
+            result = unload(self, _arg)
             embed.add_field(name=f"`{_arg.upper()}` Unload | Ergebnis", value=result, inline=False)
         await msg.edit(embed=embed, delete_after=8)
 
@@ -60,7 +61,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         embed = Embed(title="Reload | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
         for _num, _arg in enumerate(args):
-            result = await reload(self, _arg)
+            result = reload(self, _arg)
             embed.add_field(name=f"`{_arg.upper()}` Reload | Ergebnis", value=result, inline=False)
         await msg.edit(embed=embed, delete_after=8)
 

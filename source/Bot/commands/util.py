@@ -4,7 +4,7 @@ import nextcord
 import time
 from loguru import logger
 from .Assets.badgefinder import badgefinder
-from ..Helper.checks import ids
+from ..Helper.checks import ids, is_banned
 
 
 class util(commands.Cog):
@@ -25,6 +25,7 @@ class util(commands.Cog):
         await ctx.send(embed=embed, delete_after=8)
 
     @commands.command(name="ping")
+    @is_banned()
     async def ping(self, ctx):
         await ctx.message.delete()
         start_time = time.time()
@@ -33,7 +34,7 @@ class util(commands.Cog):
         websocket = round(self.bot.latency * 1000)
         api = round((end_time - start_time) * 1000)
         
-        embed = nextcord.Embed(title="Z00NI's Latenz(Websocket & API)")
+        embed = nextcord.Embed(title="Z00NI's Latenz(Websocket & API)", colour=nextcord.Colour.blurple())
         embed.add_field(name="WEBSOCKET", value=f"> {websocket}ms")
         embed.add_field(name="API", value=f"> {api}ms")
         await msg.edit(content="", embed=embed, delete_after=8)
