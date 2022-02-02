@@ -10,7 +10,8 @@ class ids():
     VIPs = [
         int(520943869324689409), # MINNI_GUN
         int(746839189315649647), # xXKvassmanXx
-        int(507517299746537472) # Juox
+        int(507517299746537472), # Juox
+        int(667048701339893781) # Cleimax
         ]
     BOTs = [
         int(924832290616508476),

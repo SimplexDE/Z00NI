@@ -1,5 +1,3 @@
-from datetime import datetime
-import nextcord
 from nextcord.ext import commands
 from nextcord.ext.commands import  Context
 from nextcord import Embed, Colour
@@ -8,7 +6,7 @@ from loguru import logger
 from source.Bot.bot import stop
 
 from .Assets.dev import load, unload, reload
-from ..Helper.checks import is_staff
+from ..Helper.checks import is_staff, is_dev
 
 class developer(commands.Cog):
     def __init__(self, bot):
@@ -21,52 +19,50 @@ class developer(commands.Cog):
         logger.log("BOT", f"Commands need to be loaded manually(ofc developer is loaded ^^)")
 
     @commands.command(name="shutdownbot", aliases=["stopbot", "botstop", "shutdown", "stop"])
-    @is_staff()
+    @is_dev()
     async def shutdownbot(self, ctx):
         """Shuts down the bot"""
-        await stop(ctx)
+        await ctx.message.delete()
+        await stop(ctx)            
 
     @commands.command(name="load", aliases=["enable", "l"])
-    @is_staff()
-    async def load(self, ctx: Context, module: str):
+    @is_dev()
+    async def load(self, ctx: Context, *args):
         """Loads a Cog"""
-        embed = Embed(title="Load | Loading...", colour=Colour.orange(), timestamp=ctx.message.created_at)
+        await ctx.message.delete()
+        embed = Embed(title="Load | Lade...", colour=Colour.orange(), timestamp=ctx.message.created_at)
         msg = await ctx.send(embed=embed)
-        state = await load(self, module)
-        if state == True:
-            embed = Embed(title="Load | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
-        elif state == False:
-            embed = Embed(title="Load | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
+        embed = Embed(title="Load | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
+        for _num, _arg in enumerate(args):
+            result = await load(self, _arg)
+            embed.add_field(name=f"`{_arg.upper()}` Load | Ergebnis", value=result, inline=False)
+        await msg.edit(embed=embed, delete_after=8)
 
     @commands.command(name="unload", aliases=["disable", "unl"])
-    @is_staff()
-    async def unload(self, ctx: Context, module: str):
+    @is_dev()
+    async def unload(self, ctx: Context, *args):
         """Unloads a Cog"""
-        embed = Embed(title="Unload | Loading...", colour=Colour.orange(), timestamp=ctx.message.created_at)
+        await ctx.message.delete()
+        embed = Embed(title="Unload | Lade...", colour=Colour.orange(), timestamp=ctx.message.created_at)
         msg = await ctx.send(embed=embed)
-        state = await unload(self, module)
-        if state == True:
-            embed = Embed(title="Unload | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
-        elif state == False:
-            embed = Embed(title="Unload | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
+        embed = Embed(title="Unload | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
+        for _num, _arg in enumerate(args):
+            result = await unload(self, _arg)
+            embed.add_field(name=f"`{_arg.upper()}` Unload | Ergebnis", value=result, inline=False)
+        await msg.edit(embed=embed, delete_after=8)
 
-    @commands.command(name="reload", aliases=["r"])
-    @is_staff()
-    async def reload(self, ctx: Context, module: str):
+    @commands.command(name="reload")
+    @is_dev()
+    async def reload(self, ctx: Context, *args):
         """Reloads a Cog"""
-        embed = Embed(title="Reload | Loading...", colour=Colour.orange(), timestamp=ctx.message.created_at)
+        await ctx.message.delete()
+        embed = Embed(title="Reload | Lade...", colour=Colour.orange(), timestamp=ctx.message.created_at)
         msg = await ctx.send(embed=embed)
-        state = await reload(self, module)
-        if state == True:
-            embed = Embed(title="Reload | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
-        elif state == False:
-            embed = Embed(title="Reload | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
-            await msg.edit(embed=embed, delete_after=4)
+        embed = Embed(title="Reload | Ergebnisse", colour=Colour.green(), timestamp=ctx.message.created_at)
+        for _num, _arg in enumerate(args):
+            result = await reload(self, _arg)
+            embed.add_field(name=f"`{_arg.upper()}` Reload | Ergebnis", value=result, inline=False)
+        await msg.edit(embed=embed, delete_after=8)
 
     async def cog_command_error(self, ctx, e):
 
