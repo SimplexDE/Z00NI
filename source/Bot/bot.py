@@ -1,13 +1,10 @@
-from datetime import datetime
 import os
 from time import strftime
 
-import nextcord
-
-from .Helper.keep_alive import keep_alive
 from loguru import logger
 from nextcord.ext import commands
-from nextcord.ext.commands import Context
+
+from .Helper.keep_alive import keep_alive
 
 bot = commands.Bot(command_prefix="d!", case_insensitive=False)
 
@@ -23,6 +20,8 @@ def start(version):
 
         bot.load_extension(f"source.Bot.commands.developer")
 
+        # TODO: Extension Loader hier
+
         keep_alive()
 
         bot.run(os.getenv("tokendev"))
@@ -37,7 +36,7 @@ async def stop(ctx):
     try:
         logger.critical("SHUTDOWN INITIATED")
         await ctx.send("*Sleepmode activated...*")
-        #await bot.change_presence(activity=None, status=nextcord.Status.offline) FIXME: Will nicht funktionieren.. Irgendwann mal fixxen.
+        #await bot.change_presence(activity=None, status=nextcord.Status.offline) # BUG FIXME: Will nicht funktionieren.. Irgendwann mal fixxen.
     except Exception as e:
         logger.critical("Kritischer Fehler. System konnte nicht gestoppt werden!")
         logger.critical(e)

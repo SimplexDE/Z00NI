@@ -1,7 +1,7 @@
 # Z00NI#6775 - REWRITE
 
-Z00NI ist ein Multi-Funktionsbot, für Bäume oder so.
+Z00NI ist ein Multi-Funktionsbot.
 
 # Funktionen
 
-1. Nix.
+1. *Soon*

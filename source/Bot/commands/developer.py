@@ -16,12 +16,14 @@ class developer(commands.Cog):
 
     @commands.Cog.listener(name="on_ready")
     async def on_ready(self):
+        """Sends information on bot state / if the bot is ready"""
         logger.log("BOT", f"Logged in as: {self.bot.user}")
         logger.log("BOT", f"Commands need to be loaded manually(ofc developer is loaded ^^)")
 
     @commands.command(name="shutdownbot", aliases=["stopbot", "botstop", "shutdown", "stop"])
     @is_staff()
     async def shutdownbot(self, ctx):
+        """Shuts down the bot"""
         await stop(ctx)
 
     @commands.command(name="load", aliases=["enable", "l"])
@@ -32,7 +34,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         state = await load(self, module)
         if state == True:
-            embed = Embed(title="Load | Success", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
+            embed = Embed(title="Load | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
             await msg.edit(embed=embed, delete_after=4)
         elif state == False:
             embed = Embed(title="Load | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
@@ -46,7 +48,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         state = await unload(self, module)
         if state == True:
-            embed = Embed(title="Unload | Success", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
+            embed = Embed(title="Unload | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
             await msg.edit(embed=embed, delete_after=4)
         elif state == False:
             embed = Embed(title="Unload | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
@@ -60,7 +62,7 @@ class developer(commands.Cog):
         msg = await ctx.send(embed=embed)
         state = await reload(self, module)
         if state == True:
-            embed = Embed(title="Reload | Success", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
+            embed = Embed(title="Reload | Success", colour=Colour.brand_green(), timestamp=ctx.message.created_at)
             await msg.edit(embed=embed, delete_after=4)
         elif state == False:
             embed = Embed(title="Reload | Failure", description="Siehe Konsole für mehr Informationen.", colour=Colour.brand_red(), timestamp=ctx.message.created_at)
@@ -88,3 +90,4 @@ class developer(commands.Cog):
 
 def setup(bot):
     bot.add_cog(developer(bot))
+    
