@@ -1,7 +1,8 @@
 from loguru import logger
+import os
 
 from source.Bot import bot
 
-version = "0.1.0"
+version = os.getenv("version")
 
 bot.start(version)
